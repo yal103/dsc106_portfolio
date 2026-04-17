@@ -7,13 +7,11 @@ html {
 }
 
 body {
-    /* Set line height to 1.5 times the font size
-         and use the OS’s UI font as the website font
-       */
     font: 100%/1.5 system-ui;
     max-width: 100ch;
     margin-inline: max(1em, (100% - 100ch) / 2);
     accent-color: var(--color-accent);
+    padding-top: 3rem;
 }
 
 nav {
@@ -51,7 +49,7 @@ nav {
     .current {
         border-bottom-width: 0.4em;
         border-bottom-style: solid;
-        border-bottom-color: oklch(80% 3% 200);
+        border-bottom-color: color-mix(in oklch, canvastext 35%, canvas 65%);
     }
 
 }
@@ -119,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .resume-page h1 + p {
     margin-top: 0;
-    color: #666;
+    color: color-mix(in oklch, canvastext 55%, canvas 45%);
     font-style: italic;
 }
 
@@ -128,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 2rem;
     margin-bottom: 0.5rem;
     padding-bottom: 0.2rem;
-    border-bottom: 2px solid oklch(80% 3% 200);
+    border-bottom: 2px solid color-mix(in oklch, canvastext 25%, canvas 75%);
 }
 
 .resume-page h3 {
@@ -144,14 +142,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .resume-page > h2 + p {
     margin-top: 0;
-    color: #444;
+    color: color-mix(in oklch, canvastext 70%, canvas 30%);
 }
 
 .resume-page section {
     margin-block: 1.5rem;
     padding: 1rem 1.25rem;
-    background: oklch(98% 1% 200);
-    border: 1px solid oklch(90% 2% 200);
+    background: color-mix(in oklch, canvas 92%, var(--color-accent) 8%);
+    border: 1px solid color-mix(in oklch, canvastext 20%, canvas 80%);
     border-radius: 0.75rem;
 }
 
@@ -170,7 +168,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .resume-page article header p {
     margin: 0;
-    color: #666;
+    color: color-mix(in oklch, canvastext 60%, canvas 40%);
     font-size: 0.95rem;
     white-space: nowrap;
 }
@@ -197,7 +195,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .resume-page section:first-of-type {
-    background: white;
+    background: color-mix(in oklch, canvas 96%, var(--color-accent) 4%);
     border-left: 0.4rem solid var(--color-accent);
 }
 
@@ -214,9 +212,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .color-scheme {
     position: absolute;
-    top: 1rem;
+    top: 0.5rem;
     right: 1rem;
     font-size: 80%;
+    background: canvas;
+    color: canvastext;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
 }
 
 input,
