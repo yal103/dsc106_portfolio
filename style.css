@@ -105,8 +105,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #pfp {
-    width: min(60%, 30em);
+    display: block;
+    margin: 1.5rem auto;
+    width: min(35%, 30em);
     height: auto;
+    clip-path: circle();
 }
 
 
