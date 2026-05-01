@@ -30,6 +30,8 @@ let data = rolledData.map(([year, count]) => {
 
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
+let selectedIndex = -1;
+
 let query = '';
 let searchInput = document.querySelector('.searchBar');
 
@@ -53,10 +55,34 @@ function renderPieChart(projectsGiven) {
     svg.selectAll('path').remove();
     d3.select('.legend').selectAll('li').remove();
 
-    newArcs.forEach((arc, idx) => {
+    newArcs.forEach((arc, i) => {
         svg.append('path')
             .attr('d', arc)
-            .attr('fill', colors(idx));
+            .attr('fill', colors(i))
+            .attr('class', selectedIndex === i ? 'selected' : '')
+            .on('click', () => {
+                selectedIndex = selectedIndex === i ? -1 : i;
+    
+                svg.selectAll('path')
+                    .attr('class', (_, idx) => selectedIndex === idx ? 'selected' : '');
+    
+                d3.select('.legend')
+                    .selectAll('li')
+                    .attr('class', (_, idx) =>
+                        idx === selectedIndex ? 'legend-item selected' : 'legend-item'
+                    );
+                if (selectedIndex === -1) {
+                    renderProjects(projectsGiven, projectsContainer, 'h2');
+                } else {
+                    const selectedYear = newData[selectedIndex].label;
+
+                    const filteredProjects = projectsGiven.filter((project) =>
+                        project.year === selectedYear
+                    );
+
+                    renderProjects(filteredProjects, projectsContainer, 'h2');
+                }
+            });
     });
 
     let legend = d3.select('.legend');
@@ -64,7 +90,7 @@ function renderPieChart(projectsGiven) {
     newData.forEach((d, idx) => {
         legend.append('li')
             .attr('style', `--color: ${colors(idx)}`)
-            .attr('class', 'legend-item')
+            .attr('class', idx === selectedIndex ? 'legend-item selected' : 'legend-item')
             .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
     });
 }
@@ -82,3 +108,6 @@ searchInput.addEventListener('input', (event) => {
     renderProjects(filteredProjects, projectsContainer, 'h2');
     renderPieChart(filteredProjects);
 });
+
+
+

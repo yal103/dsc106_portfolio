@@ -334,3 +334,30 @@ select {
     max-width: 100%;
     justify-content: center;
 }
+
+&:has(path:hover) {
+    path:not(:hover) {
+      opacity: 0.5;
+    }
+}
+
+path {
+    transition: 300ms;
+}
+
+.selected {
+    --color: oklch(0.7 0.25 320) !important;
+}
+
+.selected:is(path) {
+    fill: var(--color);
+}
+
+.legend-item.selected {
+    font-weight: bold;
+}
+
+#projects-plot path {
+    cursor: pointer;
+    transition: 300ms;
+}
