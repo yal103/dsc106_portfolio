@@ -30,37 +30,55 @@ let data = rolledData.map(([year, count]) => {
 
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-const sliceGenerator = d3.pie().value((d) => d.value);
-const arcData = sliceGenerator(data);
-const arcs = arcData.map((d) => arcGenerator(d));
-
-arcs.forEach((arc, idx) => {
-    svg.append('path')
-        .attr('d', arc)
-        .attr('fill', colors(idx));
-});
-
-let legend = d3.select('.legend');
-data.forEach((d, idx) => {
-    legend
-        .append('li')
-        .attr('style', `--color:${colors(idx)}`) // set the style attribute while passing in parameters
-        .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`); // set the inner html of <li>
-});
-
 let query = '';
 let searchInput = document.querySelector('.searchBar');
 
+function renderPieChart(projectsGiven) {
+    let newRolledData = d3.rollups(
+        projectsGiven,
+        (v) => v.length,
+        (d) => d.year
+    );
+
+    let newData = newRolledData.map(([year, count]) => {
+        return { value: count, label: year };
+    });
+
+    let newSliceGenerator = d3.pie()
+        .value((d) => d.value);
+
+    let newArcData = newSliceGenerator(newData);
+    let newArcs = newArcData.map((d) => arcGenerator(d));
+
+    svg.selectAll('path').remove();
+    d3.select('.legend').selectAll('li').remove();
+
+    newArcs.forEach((arc, idx) => {
+        svg.append('path')
+            .attr('d', arc)
+            .attr('fill', colors(idx));
+    });
+
+    let legend = d3.select('.legend');
+
+    newData.forEach((d, idx) => {
+        legend.append('li')
+            .attr('style', `--color: ${colors(idx)}`)
+            .attr('class', 'legend-item')
+            .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
+    });
+}
+
+renderPieChart(projects);
+
 searchInput.addEventListener('input', (event) => {
-    // update query value
     query = event.target.value;
 
-    // filter projects
     let filteredProjects = projects.filter((project) => {
         let values = Object.values(project).join('\n').toLowerCase();
         return values.includes(query.toLowerCase());
     });
 
-    // render filtered projects
     renderProjects(filteredProjects, projectsContainer, 'h2');
+    renderPieChart(filteredProjects);
 });
