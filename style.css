@@ -286,4 +286,51 @@ select {
     max-width: 20em;
     margin-block: 2em;
     overflow: visible;
+    height: clamp(200px, 40vw, 350px);  
+    width: auto;                     
+    flex-shrink: 0;                    
+}
+
+
+.legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    margin-block: 1.5rem;
+    border: 1px solid color-mix(in oklch, canvastext 10%, canvas 80%);
+    border-radius: 0.75rem;
+    list-style: none;
+    flex: 1;
+    align-content: center;
+    height: 100%;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.swatch {
+    display: inline-block;
+    width: 1em;
+    aspect-ratio: 1 / 1;
+    background: var(--color);
+    border-radius: 50%;
+}
+
+.chart-container {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 2rem);
+    margin-block: 2rem;
+    max-width: 100%;
+    justify-content: center;
 }
