@@ -88,7 +88,6 @@ function renderCommitInfo(data, commits) {
   addStat("Total commits", commits.length);
   addStat("Files", numberOfFiles);
   addStat("Max depth", maxDepth);
-  addStat("Average line length", averageLineLength.toFixed(1));
   addStat("Longest line", `${longestLine.length}`);
   addStat("Average file length", averageFileLength.toFixed(1));
   addStat("Longest file", longestFile[0]);
