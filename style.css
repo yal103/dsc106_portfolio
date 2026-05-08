@@ -357,3 +357,26 @@ path {
   cursor: pointer;
   transition: 300ms;
 }
+
+#chart {
+  margin-block: 2rem;
+}
+
+#chart svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.gridlines line {
+  stroke: color-mix(in oklch, canvastext 20%, canvas 80%);
+  stroke-dasharray: 2 2;
+}
+
+.gridlines path {
+  display: none;
+}
+
+.dots circle {
+  fill: steelblue;
+  fill-opacity: 0.75;
+}
