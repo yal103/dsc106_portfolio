@@ -156,22 +156,28 @@ function renderScatterPlot(data, commits) {
     .attr("transform", `translate(${usableArea.left}, 0)`)
     .call(yAxis);
 
+  const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+  const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 30]);
+  // Sort commits by total lines in descending order
+  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
   const dots = svg.append("g").attr("class", "dots");
 
   dots
     .selectAll("circle")
-    .data(commits)
+    .data(sortedCommits)
     .join("circle")
     .attr("cx", (d) => xScale(d.datetime))
     .attr("cy", (d) => yScale(d.hourFrac))
-    .attr("r", 5)
-    .attr("fill", "steelblue")
+    .attr("r", (d) => rScale(d.totalLines))
+    .style("fill-opacity", 0.7) // Add transparency for overlapping dots
     .on("mouseenter", (event, commit) => {
+      d3.select(event.currentTarget).style("fill-opacity", 1); // Full opacity on hover
       renderTooltipContent(commit);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
-    .on("mouseleave", () => {
+    .on("mouseleave", (event) => {
+      d3.select(event.currentTarget).style("fill-opacity", 0.7);
       updateTooltipVisibility(false);
     });
 }
@@ -179,14 +185,25 @@ function renderScatterPlot(data, commits) {
 function renderTooltipContent(commit) {
   const link = document.getElementById("commit-link");
   const date = document.getElementById("commit-date");
+  const time = document.getElementById("commit-time");
+  const author = document.getElementById("commit-author");
+  const lines = document.getElementById("commit-lines");
 
   if (Object.keys(commit).length === 0) return;
 
   link.href = commit.url;
-  link.textContent = commit.id;
+  link.textContent = commit.id.slice(0, 7);
+
   date.textContent = commit.datetime?.toLocaleString("en", {
     dateStyle: "full",
   });
+
+  time.textContent = commit.datetime?.toLocaleString("en", {
+    timeStyle: "short",
+  });
+
+  author.textContent = commit.author;
+  lines.textContent = commit.totalLines;
 }
 
 function updateTooltipVisibility(isVisible) {
@@ -196,8 +213,24 @@ function updateTooltipVisibility(isVisible) {
 
 function updateTooltipPosition(event) {
   const tooltip = document.getElementById("commit-tooltip");
-  tooltip.style.left = `${event.clientX}px`;
-  tooltip.style.top = `${event.clientY}px`;
+
+  const offset = 12;
+  const tooltipWidth = tooltip.offsetWidth;
+  const tooltipHeight = tooltip.offsetHeight;
+
+  let left = event.clientX + offset;
+  let top = event.clientY + offset;
+
+  if (left + tooltipWidth > window.innerWidth) {
+    left = event.clientX - tooltipWidth - offset;
+  }
+
+  if (top + tooltipHeight > window.innerHeight) {
+    top = event.clientY - tooltipHeight - offset;
+  }
+
+  tooltip.style.left = `${left}px`;
+  tooltip.style.top = `${top}px`;
 }
 
 let data = await loadData();
