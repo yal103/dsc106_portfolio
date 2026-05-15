@@ -1,74 +1,80 @@
-[   
-    {
-        "title": "StudyLink",
-        "year": "2024",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "A platform designed to streamline the process for students to find and connect with study partners with ease."
-    },
-    {
-        "title": "JobSwipe",
-        "year": "2025",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "A swipe-style job board that auto-fills Greenhouse application forms."
-    },
-    {
-        "title": "League of Legends Analysis",
-        "year": "2025",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "An analysis of the extent to which a team's vision control in League of Legends influences its likelihood of winning."
-    },
-    {
-        "title": "Personal Portfolio",
-        "year": "2026",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "A multi-page personal portfolio built with HTML, CSS, and JavaScript, featuring dynamic navigation, theme switching, and reusable project rendering."
-    },
-    {
-        "title": "Data Visualization Critique",
-        "year": "2026",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "A visualization project focused on evaluating design choices such as color, encoding, layout, and clarity in communicating data-driven insights."
-    },
-    {
-        "title": "San Francisco Activity Guide Website",
-        "year": "2023",
-        "image": "https://dsc106.com/labs/lab02/images/empty.svg",
-        "description": "A frontend website built with HTML, CSS, and Bootstrap that presents places to eat, play, and relax in San Francisco."
-    },
-    {
-        "title": "Huffman Coding Compression Tool",
-        "year": "2024",
-        "image": "https://dsc106.com/labs/lab02/images/empty.svg",
-        "description": "A C++ file compression and decompression program using Huffman trees, priority queues, bit-level file I/O, and custom encoding."
-    },
-    {
-        "title": "Graph Algorithms in C++",
-        "year": "2024",
-        "image": "https://dsc106.com/labs/lab02/images/empty.svg",
-        "description": "A C++ graph project implementing graph construction, BFS, Dijkstra’s algorithm, connected components, and threshold-based connectivity."
-    },
-    {
-        "title": "Yelp Restaurant Survival Model",
-        "year": "2025",
-        "image": "https://dsc106.com/labs/lab02/images/empty.svg",
-        "description": "A Python data science project investigating restaurant survival patterns using Yelp data, exploratory analysis, and predictive modeling."
-    },
-    {
-        "title": "Action Recognition with Accelerometer Data",
-        "year": "2025",
-        "image": "https://dsc106.com/labs/lab02/images/empty.svg",
-        "description": "A signal processing project using accelerometer data and frequency-domain features to classify activities such as standing, walking, and jogging."
-    },
-    {
-        "title": "Interactive Algorithm Visualizer",
-        "year": "2026",
-        "image": "https://dsc106.com/labs/lab02/images/empty.svg",
-        "description": "A web-based visualization tool that animates algorithms such as BFS, DFS, and Dijkstra’s algorithm to help users understand graph traversal."
-    },
-    {
-        "title": "Interactive Data Dashboard",
-        "year": "2022",
-        "image": "https://dsc106.com/labs/lab02/images/empty.svg",
-        "description": "A web-based dashboard that visualizes datasets with filters, charts, and interactive components to explore trends and insights."
-    }
+[
+  {
+    "title": "StudyLink",
+    "year": "2024",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "A platform designed to streamline the process for students to find and connect with study partners with ease."
+  },
+  {
+    "title": "JobSwipe",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "A swipe-style job board that auto-fills Greenhouse application forms."
+  },
+  {
+    "title": "League of Legends Analysis",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "An analysis of the extent to which a team's vision control in League of Legends influences its likelihood of winning."
+  },
+  {
+    "title": "Personal Portfolio",
+    "year": "2026",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "A multi-page personal portfolio built with HTML, CSS, and JavaScript, featuring dynamic navigation, theme switching, and reusable project rendering."
+  },
+  {
+    "title": "Data Visualization Critique",
+    "year": "2026",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "A visualization project focused on evaluating design choices such as color, encoding, layout, and clarity in communicating data-driven insights."
+  },
+  {
+    "title": "Bikewatching",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "An immersive, interactive map visualization of bike traffic in the Boston area during different times of the day"
+  },
+  {
+    "title": "San Francisco Activity Guide Website",
+    "year": "2023",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A frontend website built with HTML, CSS, and Bootstrap that presents places to eat, play, and relax in San Francisco."
+  },
+  {
+    "title": "Huffman Coding Compression Tool",
+    "year": "2024",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A C++ file compression and decompression program using Huffman trees, priority queues, bit-level file I/O, and custom encoding."
+  },
+  {
+    "title": "Graph Algorithms in C++",
+    "year": "2024",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A C++ graph project implementing graph construction, BFS, Dijkstra’s algorithm, connected components, and threshold-based connectivity."
+  },
+  {
+    "title": "Yelp Restaurant Survival Model",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A Python data science project investigating restaurant survival patterns using Yelp data, exploratory analysis, and predictive modeling."
+  },
+  {
+    "title": "Action Recognition with Accelerometer Data",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A signal processing project using accelerometer data and frequency-domain features to classify activities such as standing, walking, and jogging."
+  },
+  {
+    "title": "Interactive Algorithm Visualizer",
+    "year": "2026",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A web-based visualization tool that animates algorithms such as BFS, DFS, and Dijkstra’s algorithm to help users understand graph traversal."
+  },
+  {
+    "title": "Interactive Data Dashboard",
+    "year": "2022",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A web-based dashboard that visualizes datasets with filters, charts, and interactive components to explore trends and insights."
+  }
 ]
