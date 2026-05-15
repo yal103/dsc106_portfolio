@@ -12,11 +12,18 @@
     "description": "A swipe-style job board that auto-fills Greenhouse application forms."
   },
   {
+    "title": "Climate Interactive Visualization",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "TODO: ADD DESCRIPTION"
+  },
+  {
     "title": "League of Legends Analysis",
     "year": "2025",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
     "description": "An analysis of the extent to which a team's vision control in League of Legends influences its likelihood of winning."
   },
+
   {
     "title": "Personal Portfolio",
     "year": "2026",
@@ -31,7 +38,7 @@
   },
   {
     "title": "Bikewatching",
-    "year": "2025",
+    "year": "2026",
     "image": "https://dsc106.com/labs/lab02/images/empty.svg",
     "description": "An immersive, interactive map visualization of bike traffic in the Boston area during different times of the day"
   },
