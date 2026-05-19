@@ -3,6 +3,7 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 let xScale;
 let yScale;
 let commits;
+let commitProgress = 100;
 
 async function loadData() {
   const data = await d3.csv("loc.csv", (row) => ({
@@ -323,8 +324,6 @@ function renderLanguageBreakdown(selection) {
 
 let data = await loadData();
 commits = processCommits(data);
-
-let commitProgress = 100;
 
 let timeScale = d3
   .scaleTime()
