@@ -139,7 +139,9 @@ export function renderProjects(
 
     article.innerHTML = `
         <${headingLevel}>${title}</${headingLevel}>
-        ${image ? `<img src="${image}" alt="${title}">` : ""}
+        ${
+          image ? `<img class="project-img" src="${image}" alt="${title}">` : ""
+        }
         <div>
             <p class="project-year"><i>c. </i>${project.year}</p>
             <p>${description}</p>
