@@ -1,0 +1,4 @@
+To update loc.csv, run
+
+npm install elocuent -D
+npx elocuent -d . -o meta/loc.csv --spaces 2

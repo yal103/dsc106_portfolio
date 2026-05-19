@@ -492,3 +492,19 @@ circle.selected {
   border-radius: 0.5rem;
   margin-top: 0.75rem;
 }
+
+.slider-container label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.slider-container input[type="range"] {
+  flex: 1;
+}
+
+.slider-container time {
+  width: 100%;
+  text-align: right;
+}
