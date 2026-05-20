@@ -340,7 +340,7 @@ let commitMaxTime = timeScale.invert(commitProgress);
 function onTimeSliderChange() {
   commitProgress = Number(document.getElementById("commit-progress").value);
   commitMaxTime = timeScale.invert(commitProgress);
-  document.getElementById("commit-time").textContent =
+  document.getElementById("commit-slider-time").textContent =
     commitMaxTime.toLocaleString("en", {
       dateStyle: "long",
       timeStyle: "short",
