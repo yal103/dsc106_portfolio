@@ -323,33 +323,6 @@ function renderLanguageBreakdown(selection) {
   }
 }
 
-let data = await loadData();
-let commits = processCommits(data);
-
-let filteredCommits = commits;
-
-let timeScale = d3
-  .scaleTime()
-  .domain([
-    d3.min(commits, (d) => d.datetime),
-    d3.max(commits, (d) => d.datetime),
-  ])
-  .range([0, 100]);
-let commitMaxTime = timeScale.invert(commitProgress);
-
-function onTimeSliderChange() {
-  commitProgress = Number(document.getElementById("commit-progress").value);
-  commitMaxTime = timeScale.invert(commitProgress);
-  document.getElementById("commit-slider-time").textContent =
-    commitMaxTime.toLocaleString("en", {
-      dateStyle: "long",
-      timeStyle: "short",
-    });
-  filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
-  updateScatterPlot(data, filteredCommits);
-  renderCommitInfo(data, filteredCommits);
-}
-
 function updateScatterPlot(data, commits) {
   const width = 1000;
   const height = 600;
@@ -398,6 +371,68 @@ function updateScatterPlot(data, commits) {
       updateTooltipVisibility(false);
     });
 }
+
+function onTimeSliderChange() {
+  commitProgress = Number(document.getElementById("commit-progress").value);
+  commitMaxTime = timeScale.invert(commitProgress);
+  document.getElementById("commit-slider-time").textContent =
+    commitMaxTime.toLocaleString("en", {
+      dateStyle: "long",
+      timeStyle: "short",
+    });
+  filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
+  updateScatterPlot(data, filteredCommits);
+  renderCommitInfo(data, filteredCommits);
+  updateFileDisplay(filteredCommits);
+}
+
+function updateFileDisplay(filteredCommits) {
+  let lines = filteredCommits.flatMap((d) => d.lines);
+  let files = d3
+    .groups(lines, (d) => d.file)
+    .map(([name, lines]) => ({ name, lines }))
+    .sort((a, b) => b.lines.length - a.lines.length);
+
+  let filesContainer = d3
+    .select("#files")
+    .selectAll("div")
+    .data(files, (d) => d.name)
+    .join((enter) =>
+      enter.append("div").call((div) => {
+        div.append("dt").append("code");
+        div.append("dd");
+      })
+    );
+
+  // Line count in the dt, NOT overwriting dd
+  filesContainer
+    .select("dt > code")
+    .html((d) => `${d.name} <small>${d.lines.length} lines</small>`);
+
+  // Dots in the dd — no .text() call after this!
+  filesContainer
+    .select("dd")
+    .selectAll("div")
+    .data((d) => d.lines)
+    .join("div")
+    .attr("class", "loc")
+    .attr("style", (d) => `--color: ${colors(d.type)}`);
+}
+
+let data = await loadData();
+let commits = processCommits(data);
+let filteredCommits = commits;
+
+let timeScale = d3
+  .scaleTime()
+  .domain([
+    d3.min(commits, (d) => d.datetime),
+    d3.max(commits, (d) => d.datetime),
+  ])
+  .range([0, 100]);
+let commitMaxTime = timeScale.invert(commitProgress);
+
+let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
