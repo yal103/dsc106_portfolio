@@ -605,7 +605,7 @@ dd {
   top: 0;
   left: 0;
   bottom: auto;
-  height: 100cvh;
+  height: 100vh;
   overflow-y: auto;
 }
 
