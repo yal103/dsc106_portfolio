@@ -374,19 +374,19 @@ function updateScatterPlot(data, commits) {
     });
 }
 
-function onTimeSliderChange() {
-  commitProgress = Number(document.getElementById("commit-progress").value);
-  commitMaxTime = timeScale.invert(commitProgress);
-  document.getElementById("commit-slider-time").textContent =
-    commitMaxTime.toLocaleString("en", {
-      dateStyle: "long",
-      timeStyle: "short",
-    });
-  filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
-  updateScatterPlot(data, filteredCommits);
-  renderCommitInfo(data, filteredCommits);
-  updateFileDisplay(filteredCommits);
-}
+// function onTimeSliderChange() {
+//   commitProgress = Number(document.getElementById("commit-progress").value);
+//   commitMaxTime = timeScale.invert(commitProgress);
+//   document.getElementById("commit-slider-time").textContent =
+//     commitMaxTime.toLocaleString("en", {
+//       dateStyle: "long",
+//       timeStyle: "short",
+//     });
+//   filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
+//   updateScatterPlot(data, filteredCommits);
+//   renderCommitInfo(data, filteredCommits);
+//   updateFileDisplay(filteredCommits);
+// }
 
 function updateFileDisplay(filteredCommits) {
   let lines = filteredCommits.flatMap((d) => d.lines);
@@ -399,19 +399,29 @@ function updateFileDisplay(filteredCommits) {
     .select("#files")
     .selectAll("div")
     .data(files, (d) => d.name)
-    .join((enter) =>
-      enter.append("div").call((div) => {
-        div.append("dt").append("code");
-        div.append("dd");
-      })
+    .join(
+      (enter) =>
+        enter
+          .append("div")
+          .call((div) => {
+            div.append("dt").append("code");
+            div.append("dd");
+          })
+          .style("opacity", 0),
+      (update) => update,
+      (exit) => exit.style("opacity", 0).remove()
     );
 
-  // Line count in the dt, NOT overwriting dd
+  filesContainer
+    .transition()
+    .duration(200)
+    .style("opacity", 1)
+    .style("order", (_, i) => i);
+
   filesContainer
     .select("dt > code")
     .html((d) => `${d.name} <small>${d.lines.length} lines</small>`);
 
-  // Dots in the dd — no .text() call after this!
   filesContainer
     .select("dd")
     .selectAll("div")
@@ -439,11 +449,12 @@ let colors = d3.scaleOrdinal(d3.schemeTableau10);
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
 
-document
-  .getElementById("commit-progress")
-  .addEventListener("input", onTimeSliderChange);
+// document
+//   .getElementById("commit-progress")
+//   .addEventListener("input", onTimeSliderChange);
 
-onTimeSliderChange();
+// onTimeSliderChange();
+updateFileDisplay([]);
 
 d3.select("#scatter-story")
   .selectAll(".step")
@@ -473,8 +484,8 @@ d3.select("#scatter-story")
 function onStepEnter(response) {
   const commit = response.element.__data__;
   filteredCommits = commits.filter((d) => d.datetime <= commit.datetime);
+  const filteredLines = filteredCommits.flatMap((d) => d.lines);
   updateScatterPlot(data, filteredCommits);
-  renderCommitInfo(filteredCommits, filteredCommits);
   updateFileDisplay(filteredCommits);
 }
 
@@ -485,3 +496,45 @@ scroller
     step: "#scrolly-1 .step",
   })
   .onStepEnter(onStepEnter);
+
+d3.select("#files-story")
+  .selectAll(".step")
+  .data(commits)
+  .join("div")
+  .attr("class", "step")
+  .html(
+    (d, i) => `
+      On ${d.datetime.toLocaleString("en", {
+        dateStyle: "full",
+        timeStyle: "short",
+      })},
+      the codebase had ${
+        d3.rollups(
+          commits
+            .filter((c) => c.datetime <= d.datetime)
+            .flatMap((c) => c.lines),
+          (D) => D.length,
+          (d) => d.file
+        ).length
+      } files
+      totaling ${
+        commits.filter((c) => c.datetime <= d.datetime).flatMap((c) => c.lines)
+          .length
+      } lines.
+    `
+  );
+
+function onStepEnter2(response) {
+  const commit = response.element.__data__;
+  filteredCommits = commits.filter((d) => d.datetime <= commit.datetime);
+  updateFileDisplay(filteredCommits);
+}
+
+const scroller2 = scrollama();
+scroller2
+  .setup({
+    container: "#scrolly-2",
+    step: "#scrolly-2 .step",
+    offset: 0.8,
+  })
+  .onStepEnter(onStepEnter2);

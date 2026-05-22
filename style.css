@@ -557,6 +557,14 @@ dd {
   display: block;
   font-size: 1em;
   opacity: 0.6;
+  display: flex;
+  flex-direction: column;
+}
+
+#files {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  row-gap: 1.5em;
 }
 
 #scrolly-1 {
@@ -579,4 +587,32 @@ dd {
   left: 0;
   bottom: auto;
   height: 50vh;
+}
+
+#scrolly-2 {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  margin-top: 4rem;
+
+  > * {
+    flex: 1;
+  }
+}
+
+#files-plot {
+  position: sticky;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  height: 100cvh;
+  overflow-y: auto;
+}
+
+#files-story {
+  position: relative;
+}
+
+#files-story .step:last-child {
+  padding-bottom: 20vh;
 }
